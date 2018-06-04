@@ -36,31 +36,39 @@ addButton(buttonName[i]);
 
 $(".anyButton").on("click", function(){
 
-
+  
    searchParam =  $(this).attr("id");
-    console.log(searchParam);
-    //$("<img>").remove();
-    
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=1h8MjUBoqVAQVteGx9dpo6xcZh5sae9l&q="+searchParam + "&limit="+limit+"&offset=0&rating=G&lang=en";
-    console.log(queryURL);
+ 
     
     $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    // console.log(response);
-    // console.log(response.data[0].type);
-    // console.log(response.data[0].rating);
-    // console.log(response.data[0].images.original_still.url);
-    // console.log(response.data[0].images.original.url);
-
+  
     for (let i=0; i < limit; i++){
+
+        console.log(response);
+
+        let imagePoint = $("<img>");
+        let ratingPOint = $("<p></p>");
+        let newDiv = $("<div></div>");
+        imagePoint.attr("src",response.data[i].images.original.url);
+        imagePoint.attr("class","imageStyles"); 
+        imagePoint.attr("id","gifs"); 
+        ratingPOint.text("Rating:"+response.data[i].rating);
+
+        $("gifArea").append(ratingPOint);
+        $("gifArea").append(imagePoint);
+       
+
+
         
         // console.log(response.data[i].images.original_still.url);
         // console.log(response.data[i].images.original.url);
-        
-
-      $("gifArea").append($("<img>").attr("src",response.data[i].images.original.url));  
+       
+    //   $("gifArea").append($("<img>").attr("src",response.data[i].images.original.url));  
+    //   $("<img>").attr("class","imageStyles"); 
       //$("gifArea").append(imgs);
     }
     
