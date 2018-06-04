@@ -1,7 +1,7 @@
 
 let buttonName = ["dog", "cat", "mouse", "horse", "elephant", "tiger", "zebra", "skunk"];
 let name = "";
-let limit = 2;
+let limit = 3;
 let searchParam ="dog";
 
 let imgs = $("<img>");
@@ -36,8 +36,10 @@ addButton(buttonName[i]);
 
 $(".anyButton").on("click", function(){
 
+
    searchParam =  $(this).attr("id");
     console.log(searchParam);
+    //$("<img>").remove();
     
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=1h8MjUBoqVAQVteGx9dpo6xcZh5sae9l&q="+searchParam + "&limit="+limit+"&offset=0&rating=G&lang=en";
     console.log(queryURL);
@@ -46,14 +48,24 @@ $(".anyButton").on("click", function(){
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
-    console.log(response.data[0].type);
-    console.log(response.data[0].rating);
-    console.log(response.data[0].images.original_still.url);
-    console.log(response.data[0].images.original.url);
-    imgs.attr("src",response.data[0].images.original.url);
+    // console.log(response);
+    // console.log(response.data[0].type);
+    // console.log(response.data[0].rating);
+    // console.log(response.data[0].images.original_still.url);
+    // console.log(response.data[0].images.original.url);
 
-    $("gifArea").html(imgs);
+    for (let i=0; i < limit; i++){
+        
+        // console.log(response.data[i].images.original_still.url);
+        // console.log(response.data[i].images.original.url);
+        
+
+      $("gifArea").append($("<img>").attr("src",response.data[i].images.original.url));  
+      //$("gifArea").append(imgs);
+    }
+    
+
+    //$("gifArea").html(imgs);
     // console.log("The Genre for" +" "+ title + "is: "+response.Genre);
   });
 });
