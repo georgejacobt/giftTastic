@@ -99,7 +99,8 @@ cardTextP.text()
         imagePoint.attr("src",response.data[i].images.original_still.url);
         imagePoint.attr("class","imageStyles"); 
         imagePoint.attr("uniqID",i);
-        imagePoint.attr("gifURL",response.data[i].images.original.url)
+        imagePoint.attr("gifURL",response.data[i].images.original.url);
+        imagePoint.attr("stillURL",response.data[i].images.original_still.url);
         
         ratingPOint.text("Rating:"+response.data[i].rating); 
         
@@ -151,15 +152,22 @@ if (clickTrack % 2 === 0){
 
 });
 
+let clickFlag = false;
+
 $(document).ready(function () {
 
-$(".allGifs").on("click", function(){
+$(document).on("click", ".imageStyles", function(){
+
+  
 
    // var x =  ;
     //console.log($("img",this).attr("uniqID"));
-    console.log(this);
+    //console.log(this);
 
-    console.log($(this).children("img").attr("uniqID"));
+
+
+    console.log($(this).attr("gifURL"));
+    $(this).attr("src",$(this).attr("gifURL"));
 
     
  });
