@@ -152,22 +152,23 @@ if (clickTrack % 2 === 0){
 
 });
 
-let clickFlag = false;
+let clickFlag = true;
 
 $(document).ready(function () {
 
 $(document).on("click", ".imageStyles", function(){
 
-  
+  if (clickFlag === true){
+      $(this).attr("src",$(this).attr("gifURL"));
+      clickFlag = false;
+  } else {
+    $(this).attr("src",$(this).attr("stillURL"));
+    clickFlag = true;
 
-   // var x =  ;
-    //console.log($("img",this).attr("uniqID"));
-    //console.log(this);
-
-
+  }
 
     console.log($(this).attr("gifURL"));
-    $(this).attr("src",$(this).attr("gifURL"));
+    
 
     
  });
