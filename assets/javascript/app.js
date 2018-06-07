@@ -1,8 +1,24 @@
 
-let buttonName = ["dog", "cat", "mouse", "horse", "elephant", "tiger", "zebra", "skunk"];
+let buttonName = ["dog", "cat", "mouse", "horse", "elephant", "tiger", "zebra", "skunk", "lizard", "unicorn", "lion", "ladybug", 
+                  " platypus", "crocodile", "shark", "whale", "monkeys"];
 let name = "";
-let limit = 2;
+let limit = 10;
 let searchParam ="dog";
+let newAnimal = "";
+
+$("#submitAnimal").on("click", function(){
+
+newAnimal = $("#newAnimal").val();
+
+console.log(newAnimal);
+
+addButton(newAnimal);
+//console.log("here");
+//$("#animalForm").reset();
+});
+    
+
+
 
 let imgID = "test";
 
@@ -50,12 +66,11 @@ $(document).ready(function() {
 let clickTrack = 0;
 
 
-$(".anyButton").on("click", function(){
+$(document).on("click",".anyButton", function(){
 
-    clickTrack++;
-    
-
-
+    //clickTrack++;
+    $("div").remove();
+  
 let cardDiv = $("<div></div>");
 let cardBodyDiv = $("<div></div>");
 let cardTextP = $("<p></p>");
@@ -75,6 +90,7 @@ cardTextP.text()
 
 
    searchParam =  $(this).attr("id");
+   console.log(searchParam);
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=1h8MjUBoqVAQVteGx9dpo6xcZh5sae9l&q="+searchParam + "&limit="+limit+"&offset=0&rating=G&lang=en";
  
     
@@ -95,38 +111,48 @@ cardTextP.text()
         let ratingPOint = $("<p></p>");
         
         let newDiv = $("<div></div>");
+        newDiv.addClass("divStyle");
+       
 
         imagePoint.attr("src",response.data[i].images.original_still.url);
-        imagePoint.attr("class","imageStyles"); 
+        imagePoint.attr("class","moveGif"); 
         imagePoint.attr("uniqID",i);
         imagePoint.attr("gifURL",response.data[i].images.original.url);
         imagePoint.attr("stillURL",response.data[i].images.original_still.url);
         
-        ratingPOint.text("Rating:"+response.data[i].rating); 
-        
+        ratingPOint.text("Rating:"+" "+ response.data[i].rating); 
 
-if (clickTrack % 2 === 0){
-    $("#gifs").remove();
-    $("#rating").remove();
+         imagePoint.attr("id","gifs"); 
+    ratingPOint.attr("id","rating");
+    $("body").append(newDiv);
+    newDiv.append(ratingPOint);
+    newDiv.append(imagePoint);
 
-    imagePoint.attr("id","gifs2"); 
-    ratingPOint.attr("id","rating2");
+
+// if (clickTrack % 2 === 0){
+//     $("#gifs").remove();
+//     $("#rating").remove();
+//     $(".divStyle").remove();
+
+   
    
 
-
- $("gifArea").append(ratingPOint);
-        $("gifArea").append(imagePoint);
+//  $("body").append(newDiv);
+//  newDiv.append(ratingPOint);
+//         newDiv.append(imagePoint);
     
 
-} else {
-    $("#gifs2").remove();
-    $("#rating2").remove();
+// } else {
+//     $("#gifs2").remove();
+//     $("#rating2").remove();
+//     $(".divStyle").remove();
 
-    imagePoint.attr("id","gifs"); 
-    ratingPOint.attr("id","rating");
-    $("gifArea").append(ratingPOint);
-        $("gifArea").append(imagePoint);
-}
+//     imagePoint.attr("id","gifs"); 
+//     ratingPOint.attr("id","rating");
+//     $("body").append(newDiv);
+//     newDiv.append(ratingPOint);
+//     newDiv.append(imagePoint);
+// }
 
 
        
@@ -156,7 +182,7 @@ let clickFlag = true;
 
 $(document).ready(function () {
 
-$(document).on("click", ".imageStyles", function(){
+$(document).on("click", ".moveGif", function(){
 
   if (clickFlag === true){
       $(this).attr("src",$(this).attr("gifURL"));

@@ -27,3 +27,20 @@
 
    margin: 10px;
 }
+
+.divStyle{
+    float: left; 
+    margin: 20px;
+}
+
+.moveGif{
+
+    height: 300px;
+    width: 300px;
+
+}
+
+#rating {
+    color: red;
+    font: bolder;
+}
