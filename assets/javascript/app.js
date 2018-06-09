@@ -12,7 +12,11 @@ newAnimal = $("#newAnimal").val();
 
 console.log(newAnimal);
 
-addButton(newAnimal);
+if (newAnimal != ""){ 
+  addButton(newAnimal);
+}
+
+
 //console.log("here");
 //$("#animalForm").reset();
 });
@@ -108,7 +112,7 @@ cardTextP.text()
         console.log(response);
 
         let imagePoint = $("<img>");
-        let ratingPOint = $("<p></p>");
+        let ratingPOint = $("<h4></h4>");
         
         let newDiv = $("<div></div>");
         newDiv.addClass("divStyle");
@@ -117,6 +121,8 @@ cardTextP.text()
         imagePoint.attr("src",response.data[i].images.original_still.url);
         imagePoint.attr("class","moveGif"); 
         imagePoint.attr("uniqID",i);
+        imagePoint.attr("data-toggle", "tooltip");
+        imagePoint.attr("title", "Time Stamp Imported:"+response.data[i].import_datetime);
         imagePoint.attr("gifURL",response.data[i].images.original.url);
         imagePoint.attr("stillURL",response.data[i].images.original_still.url);
         
